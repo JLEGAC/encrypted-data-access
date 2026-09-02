@@ -1,0 +1,55 @@
+name: Contrôles et publication GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  controles-critiques:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Refuser les fichiers privés
+        id: secrets
+        run: npm run check:private
+      - name: Tester chiffrement, coffre, noms et ZIP
+        id: tests
+        run: npm test
+      - name: Résumé lisible
+        if: always()
+        run: |
+          echo "## Résultat des contrôles" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Fichiers privés : **${{ steps.secrets.outcome }}**" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Tests automatiques : **${{ steps.tests.outcome }}**" >> "$GITHUB_STEP_SUMMARY"
+          echo "Une erreur critique bloque la publication afin de protéger les données." >> "$GITHUB_STEP_SUMMARY"
+
+  publier:
+    if: github.event_name == 'push'
+    needs: controles-critiques
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - name: Publier GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
