@@ -1,0 +1,9 @@
+{
+  "name": "encrypted-data-access",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "check:private": "node scripts/check-private-files.mjs"
+  }
+}

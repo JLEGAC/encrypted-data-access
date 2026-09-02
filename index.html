@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#183153">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'">
+  <title>Fichiers protégés</title>
+  <link id="app-manifest" rel="manifest" href="./manifest.fr.webmanifest">
+  <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <button id="logo-trigger" class="logo-trigger" type="button" aria-label="Logo de l’application">
+        <img data-brand="logo" src="./assets/icon.svg" alt="" width="64" height="64">
+      </button>
+      <div>
+        <p class="eyebrow" data-brand="label">Accès sécurisé</p>
+        <h1 data-brand="name">Fichiers protégés</h1>
+        <p data-brand="description">Les fichiers publiés restent illisibles tant que ce navigateur n’est pas autorisé.</p>
+      </div>
+      <div class="header-tools"><select id="language-select" aria-label="Langue"><option value="fr">FR</option><option value="en">EN</option></select><select id="theme-select" aria-label="Thème"><option value="auto">◐ Auto</option><option value="light">☀ Clair</option><option value="dark">☾ Sombre</option></select></div>
+      <a id="admin-shortcut" class="admin-shortcut" href="./administration.html" hidden aria-label="Ouvrir l’administration" title="Administration">⚙</a>
+    </header>
+
+    <section id="access-panel" class="card" aria-labelledby="access-title">
+      <h2 id="access-title" data-i18n="ui.access">Accès de cet appareil</h2>
+      <p id="status" class="status" aria-live="polite">Vérification en ligne…</p>
+      <div id="request-panel">
+      <dl class="identity">
+        <div><dt>Identifiant d’installation</dt><dd id="installation-id">—</dd></div>
+      </dl>
+      <label for="device-label" data-i18n="ui.deviceLabel">Nom ou libellé — appareil — navigateur</label>
+      <input id="device-label" type="text" maxlength="100" autocomplete="off" placeholder="Ex. Marie — PC bureau — Edge">
+      <p class="field-note">Ce libellé est transmis à l’administrateur mais n’est jamais publié.</p>
+      <label for="request-code" data-i18n="ui.request">📋 Demande d’autorisation à transmettre</label>
+      <textarea id="request-code" rows="5" readonly spellcheck="false"></textarea>
+      <div class="actions">
+        <button id="copy-request" type="button" data-i18n="ui.copy">📋 Copier la demande</button>
+        <button id="reset-pending" class="secondary" type="button" data-i18n="ui.resetRequest">🔄 Créer une nouvelle demande</button>
+        <button id="retry-access" class="secondary" type="button" data-i18n="ui.retry">🔄 Réessayer</button>
+      </div>
+      </div>
+    </section>
+
+    <section id="data-panel" class="card" hidden aria-labelledby="data-title">
+      <div class="authorized-header">
+        <div><h2 id="data-title" data-i18n="ui.decrypted">📄 Fichier déchiffré</h2><p id="data-summary" class="summary"></p></div>
+        <aside class="access-meta">
+          <p id="verified-status" class="status" data-type="success"></p>
+          <dl class="identity"><div><dt>Identifiant d’installation</dt><dd id="authorized-installation-id">—</dd></div></dl>
+          <button id="reset-installation" class="secondary" type="button">🔄 Réinitialiser cet appareil</button>
+        </aside>
+      </div>
+      <div id="download-actions" class="actions" hidden>
+        <button id="download-clear-file" type="button" data-i18n="ui.download">📥 Télécharger le fichier déchiffré</button>
+      </div>
+      <details id="preview-panel" hidden>
+        <summary data-i18n="ui.preview">👁️ Afficher un aperçu du texte</summary>
+        <pre id="data-preview"></pre>
+      </details>
+    </section>
+
+    <section id="admin-reveal" class="admin-reveal" hidden>
+      <p>Mode administration disponible pendant quelques secondes.</p>
+      <a class="button-link secondary" href="./administration.html">Ouvrir l’administration</a>
+    </section>
+  </main>
+
+  <dialog id="reset-confirmation">
+    <form method="dialog">
+      <h2>🔄 Réinitialiser cet appareil ?</h2>
+      <p>Cette opération supprimera la clé privée actuelle. Cet appareil perdra immédiatement son accès et une nouvelle autorisation devra être demandée.</p>
+      <p>Recopie le code <strong id="reset-code"></strong> pour confirmer.</p>
+      <label>Code de confirmation <input id="reset-code-input" inputmode="numeric" autocomplete="off" maxlength="4"></label>
+      <div class="actions dialog-actions">
+        <button value="cancel" class="secondary">Annuler</button>
+        <button id="confirm-reset" value="confirm" disabled>Réinitialiser</button>
+      </div>
+    </form>
+  </dialog>
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>

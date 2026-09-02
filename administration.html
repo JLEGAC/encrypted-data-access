@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#183153">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'">
+  <title>Administration — Fichiers protégés</title><link rel="icon" href="./assets/icon.svg"><link rel="stylesheet" href="./assets/styles.css">
+</head><body><main class="container">
+  <header class="hero"><img data-brand="logo" src="./assets/icon.svg" alt="" width="64" height="64"><div><p class="eyebrow">Administration</p><h1 data-brand="admin">Gérer les fichiers protégés</h1><p>🔒 Tout est traité dans ce navigateur. Aucun secret n’est envoyé sur Internet.</p></div><div class="header-tools"><select id="language-select" aria-label="Langue"><option value="fr">FR</option><option value="en">EN</option></select><select id="theme-select" aria-label="Thème"><option value="auto">◐ Auto</option><option value="light">☀ Clair</option><option value="dark">☾ Sombre</option></select><button id="admin-logout" class="icon-button secondary" title="Quitter et oublier cet appareil">✕</button></div></header>
+  <p id="admin-status" class="status" aria-live="polite">Chargement du coffre public…</p>
+
+  <section id="setup-panel" class="card" hidden><h2>🚀 Première mise en service</h2><p>Crée le coffre administrateur et sa phrase de récupération. Cette opération n’est effectuée qu’une fois.</p><button id="create-system">Créer le coffre administrateur</button></section>
+
+  <section id="recovery-panel" class="card" hidden><h2>🔑 Sauvegarde indispensable</h2><p class="warning"><strong>Conserve cette phrase maintenant.</strong> Elle ne sera affichée qu’une seule fois. Sans elle, l’accès au coffre sera définitivement perdu.</p><output id="recovery-phrase" class="recovery-phrase"></output><div class="actions"><button id="copy-recovery">📋 Copier</button><button id="download-recovery" class="secondary">📥 Télécharger</button><button id="recovery-done" class="secondary">J’ai sauvegardé la phrase</button></div></section>
+
+  <section id="unlock-panel" class="card" hidden><h2>🔓 Ouvrir le coffre administrateur</h2><label>Phrase de récupération <input id="recovery-input" type="password" autocomplete="current-password"></label><label class="choice"><input id="remember-device" type="checkbox"> Mémoriser cet appareil d’administration</label><button id="unlock-vault">Ouvrir le coffre</button></section>
+
+  <div id="workspace" hidden>
+    <section id="publish-warning" class="warning" hidden><strong>⚠️ Première publication requise.</strong> Envoie <code>encrypted-data-public.json</code> sur GitHub avant de continuer depuis un autre appareil.</section>
+    <section class="card numbered"><span class="step">1</span><h2>🔐 Chiffrer ou mettre à jour une base</h2><p>Les espaces et accents sont transformés automatiquement en nom compatible Web.</p><label>📄 Fichier original en clair — conservé hors GitHub<input id="plain-file" type="file"></label><div id="slug-preview" class="request-summary" hidden></div><button id="encrypt-file">Chiffrer et télécharger le ZIP public</button></section>
+
+    <section class="card numbered"><span class="step">2</span><h2>👤 Autoriser un utilisateur</h2><label>🌐 Base protégée — chargée depuis le coffre<select id="authorize-data"></select></label><label>📋 Demande ACCESSREQ1 transmise par l’utilisateur<textarea id="authorization-request" rows="5" placeholder="ACCESSREQ1.…"></textarea></label><section id="request-summary" class="request-summary" hidden></section><fieldset><legend>🔒 Droits accordés à l’utilisateur</legend><label class="choice"><input type="radio" name="access-mode" value="preview-download" checked> Aperçu et téléchargement</label><label class="choice"><input type="radio" name="access-mode" value="download-only"> Téléchargement uniquement</label><label class="choice"><input type="radio" name="access-mode" value="app-only"> Utilisation par l’application uniquement</label></fieldset><label>⏳ Expiration<input id="expiration-date" type="datetime-local"></label><button id="authorize-user">Autoriser et télécharger le ZIP public</button></section>
+
+    <section class="card numbered"><span class="step">3</span><h2>🚫 Retirer un accès et renouveler la protection</h2><p>La clé de cette base sera renouvelée. Le fichier original est nécessaire pour rechiffrer les données.</p><label>🌐 Base concernée<select id="revoke-data"></select></label><label>📄 Fichier original correspondant — conservé hors GitHub<input id="revoke-plain-file" type="file"></label><div id="recipient-list" class="recipient-list"></div><button id="revoke-user" class="danger">Retirer les accès sélectionnés et renouveler</button></section>
+
+    <section class="card"><h2>⚠️ Recréer entièrement le système</h2><p>Crée une nouvelle phrase et rend les anciens coffres incompatibles.</p><button id="recreate-system" class="danger">Recréer le système</button></section>
+  </div>
+  <section id="progress-panel" class="card progress-panel" hidden><progress></progress><span>Traitement en cours…</span></section>
+  <section id="download-summary" class="card" hidden><h2>📦 ZIP téléchargé</h2><p>Copie uniquement les fichiers du dossier <code>PUBLIC-GITHUB</code> vers <code>data/</code>.</p><div id="download-list"></div></section>
+</main>
+<dialog id="danger-dialog"><form method="dialog"><h2>Confirmer l’opération</h2><p>Recopie le code <strong id="danger-code"></strong>.</p><label>Code de confirmation<input id="danger-input" inputmode="numeric" maxlength="4"></label><div class="actions dialog-actions"><button value="cancel" class="secondary">Annuler</button><button id="danger-confirm" value="confirm" disabled>Confirmer</button></div></form></dialog>
+<script type="module" src="./src/admin.js"></script></body></html>

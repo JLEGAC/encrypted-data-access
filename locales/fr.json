@@ -1,0 +1,6 @@
+{
+  "status": { "checking": "Vérification en ligne…", "unauthorized": "Cet appareil n’est pas encore autorisé.", "authorized": "Dernière version chargée et déchiffrée uniquement en mémoire." },
+  "errors": { "network": "Impossible de vérifier les autorisations. Vérifie la connexion puis réessaie." },
+  "device": { "unknown": "Non détecté" },
+  "ui": { "access": "Accès de cet appareil", "deviceLabel": "Nom ou libellé — appareil — navigateur", "request": "📋 Demande d’autorisation à transmettre", "copy": "📋 Copier la demande", "resetRequest": "🔄 Créer une nouvelle demande", "retry": "🔄 Réessayer", "decrypted": "📄 Fichier déchiffré", "download": "📥 Télécharger le fichier déchiffré", "preview": "👁️ Afficher un aperçu du texte", "setup": "🚀 Première mise en service", "createVault": "Créer le coffre administrateur", "saveRecovery": "🔑 Sauvegarde indispensable", "copyRecovery": "📋 Copier", "downloadRecovery": "📥 Télécharger", "unlock": "🔓 Ouvrir le coffre administrateur", "openVault": "Ouvrir le coffre", "encrypt": "🔐 Chiffrer ou mettre à jour une base", "encryptButton": "Chiffrer et télécharger le ZIP public", "authorize": "👤 Autoriser un utilisateur", "authorizeButton": "Autoriser et télécharger le ZIP public", "revoke": "🚫 Retirer un accès et renouveler la protection", "revokeButton": "Retirer les accès sélectionnés et renouveler" }
+}

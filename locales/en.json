@@ -1,0 +1,6 @@
+{
+  "status": { "checking": "Checking online…", "unauthorized": "This device is not authorized yet.", "authorized": "Latest version loaded and decrypted in memory only." },
+  "errors": { "network": "Unable to check permissions. Check the connection and try again." },
+  "device": { "unknown": "Not detected" },
+  "ui": { "access": "Access for this device", "deviceLabel": "Name or label — device — browser", "request": "📋 Authorization request to send", "copy": "📋 Copy request", "resetRequest": "🔄 Create a new request", "retry": "🔄 Try again", "decrypted": "📄 Decrypted file", "download": "📥 Download decrypted file", "preview": "👁️ Show text preview", "setup": "🚀 First setup", "createVault": "Create administrator vault", "saveRecovery": "🔑 Essential backup", "copyRecovery": "📋 Copy", "downloadRecovery": "📥 Download", "unlock": "🔓 Unlock administrator vault", "openVault": "Unlock vault", "encrypt": "🔐 Encrypt or update a database", "encryptButton": "Encrypt and download public ZIP", "authorize": "👤 Authorize a user", "authorizeButton": "Authorize and download public ZIP", "revoke": "🚫 Revoke access and rotate protection", "revokeButton": "Revoke selected access and rotate" }
+}

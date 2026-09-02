@@ -1,0 +1,14 @@
+{
+  "applicationName": { "fr": "Fichiers protégés", "en": "Protected files" },
+  "headerLabel": { "fr": "Accès sécurisé", "en": "Secure access" },
+  "description": {
+    "fr": "Les fichiers publiés restent illisibles tant que ce navigateur n’est pas autorisé.",
+    "en": "Published files remain unreadable until this browser is authorized."
+  },
+  "administrationName": { "fr": "Gérer les fichiers protégés", "en": "Manage protected files" },
+  "logo": "./assets/icon.svg",
+  "defaultLanguage": "auto",
+  "fallbackLanguage": "en",
+  "supportedLanguages": ["fr", "en"],
+  "theme": { "primaryColor": "#176b87", "darkColor": "#183153", "backgroundColor": "#eef3f8" }
+}
