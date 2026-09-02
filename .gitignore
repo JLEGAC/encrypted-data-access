@@ -1,0 +1,9 @@
+# Secrets et données en clair — ne jamais publier
+dataprofils.json
+*-SECRET.*
+*.key
+private/
+
+# Fichiers locaux
+.DS_Store
+Thumbs.db
